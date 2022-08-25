@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MyFullCalendarModule } from './my-full-calendar-angular/my-full-calendar-angular.module';
+import { MyFullCalendarModule } from './my-full-calendar/my-full-calendar.module';
 
 @NgModule({
   declarations: [
