@@ -1,0 +1,40 @@
+.my-calendar {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+.my-calendar-container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .my-calendar {
+        font-size: 0.8em;
+    }
+
+    .my-calendar-container {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+}
+
+/* .my-calendar-row {
+    margin-bottom: 5px;
+} */
+
+.my-calendar-box-col {
+    display: inline-block;
+    width: 14.285714285714286%;
+    max-width: 14.285714285714286%;
+}
+
+.my-calendar-weekday-title {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    background-color: #2f74b5;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}

@@ -1,0 +1,125 @@
+<div class="container">
+
+  <form [formGroup]="reminderForm">
+
+    <div class="row">
+
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label for="reminder">Reminder</label>
+          <input type="text" class="form-control" formControlName="reminder"
+            [ngClass]="{ 'is-invalid': reminder?.touched && reminder?.invalid }" id="reminder"
+            aria-describedby="reminderHelp" placeholder="Enter Reminder">
+          <div class="invalid-feedback" *ngIf="reminder?.touched && reminder?.invalid">
+            <span *ngIf="reminder?.errors?.required">Required Field</span>
+            <span *ngIf="reminder?.errors?.maxlength">At most 30 characters</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" class="form-control" formControlName="city"
+            [ngClass]="{ 'is-invalid': city?.touched && city?.invalid }" id="city" aria-describedby="cityHelp"
+            placeholder="Enter City">
+          <div class="invalid-feedback" *ngIf="city?.touched && city?.invalid">
+            Has Error
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+
+      <div class="col-md-6 col-sm-12" *ngIf="datepickerInitialValue">
+        <div class="form-group datepicker-container">
+
+          <ngb-datepicker [(ngModel)]="datepickerInitialValue" #dp formControlName="date"
+            [ngClass]="{ 'is-invalid': date?.touched && date?.invalid }" id="date" aria-describedby="dayHelp"
+            placeholder="Enter Day">
+          </ngb-datepicker>
+
+          <div class="invalid-feedback" *ngIf="date?.touched && date?.invalid">
+            Has Error
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group timepicker-container">
+          <ngb-timepicker #tp formControlName="time" [ngClass]="{ 'is-invalid': time?.touched && time?.invalid }"
+            id="time" aria-describedby="timeHelp" placeholder="Enter Time">
+          </ngb-timepicker>
+
+          <div class="invalid-feedback" *ngIf="time?.touched && time?.invalid">
+            Has Error
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="color">Color</label>
+          <input type="text" class="form-control" formControlName="color"
+            [ngClass]="{ 'is-invalid': color?.touched && color?.invalid }" id="color" aria-describedby="colorHelp"
+            placeholder="Enter Color">
+          <div class="invalid-feedback" *ngIf="color?.touched && color?.invalid">
+            Has Error
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col">
+        <label for="color">Pick a Color</label><br />
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color"
+          [ngClass]="{ 'is-invalid': color?.touched && color?.invalid }" id="color" aria-describedby="colorHelp">
+
+          <label ngbButtonLabel class="btn-primary" *ngFor="let colorOption of colorOptions"
+            [ngStyle]="{ 'background-color': colorOption.value }">
+            <input ngbButton type="radio" [value]="colorOption.value">
+          </label>
+          <!-- <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" value="middle"> Middle
+          </label> -->
+          <!-- <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" [value]="false"> Right
+          </label> -->
+        </div>
+        <div class="invalid-feedback" *ngIf="color?.touched && color?.invalid">
+          Has Error
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-success float-right" [disabled]="!reminderForm.valid"
+          (click)="AddReminder()">Create</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+
+<!-- <div *ngIf="name?.invalid && (name?.dirty || name?.touched)"
+    class="alert alert-danger">
+
+  <div *ngIf="name?.errors?.required">
+    Name is required.
+  </div>
+  <div *ngIf="name?.errors?.minlength">
+    Name must be at least 4 characters long.
+  </div>
+  <div *ngIf="name?.errors?.forbiddenName">
+    Name cannot be Bob.
+  </div>
+</div> -->

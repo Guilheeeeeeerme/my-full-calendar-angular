@@ -1,0 +1,18 @@
+<div class="my-calendar-datebox" (click)="selectDate()"
+    [ngClass]="{'weekend': !(weekday % 6), 'not-month': !withinTheViewMonth }">
+
+    <div class="date-label-container">
+        <p class="date-label">{{ day }}</p>
+    </div>
+
+    <div class="reminders-container">
+        <div class="reminders-container-list">
+            <p class="reminders-container-list-item" *ngFor="let reminder of reminders"
+                [ngStyle]="{ 'color': reminder.color }">
+                {{ reminder | reminderDescription : 'short' }}</p>
+            <p class="reminders-container-list-item" *ngIf="hasMore > 0">
+                {{ hasMore }} more ...</p>
+        </div>
+    </div>
+
+</div>

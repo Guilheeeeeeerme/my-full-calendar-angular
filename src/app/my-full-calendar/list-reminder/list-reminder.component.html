@@ -1,0 +1,81 @@
+<div class="container">
+
+    <div class="row mb-1" *ngIf="reminders && reminders.length > 0 ; else emptyList">
+
+        <div class="col-12">
+            <label>
+                Reminders for {{ dateLabel | date : 'MMMM YYYY' }}
+            </label>
+        </div>
+
+        <div class="col-12">
+            <ul class="list-group">
+
+                <a href="#" *ngFor="let reminder of reminders" (click)="onSelectReminderOnList(reminder)"
+                    class="list-group-item list-group-item-action flex-column align-items-start"
+                    [ngStyle]="{ 'border-color': reminder.color }">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ reminder.reminder }}</h5>
+                        <small class="text-muted">{{ ( reminder | reminderDescription : 'datetime') | date : 'MMMM dd
+                            HH:mm' }}</small>
+                        <!-- <small class="text-muted">{{ reminder | reminderDescription : 'time' }}</small> -->
+                    </div>
+                    <p class="mb-1">City: {{ reminder.city }}</p>
+                    <small *ngIf="reminder.weatherInfo" class="text-muted">{{ reminder.weatherInfo | weather }}.</small>
+                    <small *ngIf="!reminder.weatherInfo" class="text-muted">No weather information available.</small>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <ng-template #emptyList>
+        <div class="row mb-1">
+            <div class="col">
+                <label>
+                    No reminders for {{ dateLabel | date : 'MMMM YYYY' }}
+                </label>
+            </div>
+        </div>
+    </ng-template>
+
+    <div class="row">
+        <div class="col" *ngIf="reminders && reminders.length > 0">
+            <button class="btn btn-danger my-calendar-btn-add float-left" (click)="onClickClearAll()">
+                Delete all</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-success my-calendar-btn-add float-right" (click)="onClickCreateReminder()">
+                Add a reminder</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal for creating reminder -->
+<ng-template #updateReminderModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update Reminder</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onUpdateReminderModalDismised()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-update-reminder [selectedReminder]="selectedReminder" (onUpdateReminder)="onReminderUpdated()">
+        </app-update-reminder>
+    </div>
+</ng-template>
+
+
+<!-- Modal for creating reminder -->
+<ng-template #createReminderModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create Reminder</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onCreateReminderModalDismised()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-create-reminder [selectedDay]="selectedDay" (onCreateReminder)=onReminderCreated()>
+        </app-create-reminder>
+    </div>
+</ng-template>
